@@ -5,8 +5,8 @@ var email = $.localStorage.getItem('email');
 var civil = $.localStorage.getItem('civil');
 var nom = $.localStorage.getItem('nom');
 var prenom = $.localStorage.getItem('prenom');
-var siret = $.localStorage.getItem('siret');
-var station = $.localStorage.getItem('station');
+var siret = '';
+var station = '';
 var group = $.localStorage.getItem('group');
 var mngid = $.localStorage.getItem('mngid');
 var pass = $.localStorage.getItem('pass');
@@ -187,8 +187,8 @@ $('#manage').live('pagecreate', function() {
 	$('#taxi').val(taxi);
 	$('#tel').val(tel);
 	$('#email').val(email);
-	$('#siret').val(siret);
-	$('#station').val(dec_station);
+	//$('#siret').val(siret);
+	//$('#station').val(dec_station);
 	$('#log').val(tel);
 	$.post("https://ssl14.ovh.net/~taxibleu/ambuclient/billing.php", { taxi: taxi, pass: pass, dep: 'ambu', mngid: mngid }, function(data){
 		$("#billing").empty().append(data);
@@ -863,11 +863,6 @@ $(document).ready(function(){
 		   required: true,
 		   phone: true
 		 },
-		 siret: {
-		   required: true,
-		   siret: true
-		 },
-		 station: "required",
 		 email: {
 		   required: true,
 		   email: true
@@ -882,7 +877,6 @@ $(document).ready(function(){
 		 nom: "Ce champs est obligatoire",
 		 prenom: "Ce champs est obligatoire",
 		 taxi: "Ce champs est obligatoire",
-		 station: "Ce champs est obligatoire",
 		 email: {
 		   required: "Nous avons besoin de votre email afin de vous contacter",
 		   email: "Votre email doit &ecirc;tre au format nom@domaine.com"
@@ -913,9 +907,9 @@ $(document).ready(function(){
 				$.localStorage.setItem('prenom', data.prenom);
 				$.localStorage.setItem('taxi', data.taxi);
 				$.localStorage.setItem('tel', data.tel);
-				$.localStorage.setItem('siret', data.siret);
+				//$.localStorage.setItem('siret', data.siret);
 				$.localStorage.setItem('email', data.email);
-				$.localStorage.setItem('station', data.station);
+				//$.localStorage.setItem('station', data.station);
 				$.sessionStorage.setItem('pwd', data.pwd);
 				$.sessionStorage.setItem('modmy', data.modmy);
 				
