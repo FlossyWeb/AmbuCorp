@@ -64,7 +64,7 @@ $( '#directions_map' ).live( 'pagebeforeshow',function(event){
 	$("#infos_map").append(infos);			
 	if (rdv != '')
 	{
-		$.post("https://ssl14.ovh.net/~taxibleu/client/in_app_calls.php", { map: 'true', cmd: cmd, rdv: rdv, com: com, idcourse: idcourse, cell: cell, pass: pass, dep: '34' }, function(data){
+		$.post("https://ssl14.ovh.net/~taxibleu/ambuclient/in_app_calls.php", { map: 'true', cmd: cmd, rdv: rdv, com: com, idcourse: idcourse, cell: cell, pass: pass, dep: 'ambu' }, function(data){
 			$("#infos_map").append(data);
 			$("#infos_map").trigger('create');
 			//alert(data);
@@ -143,7 +143,7 @@ $('#delayPop').live( 'pagecreate',function(event) {
 	}, 1000);
 });
 $( '#planning' ).live( 'pagebeforeshow',function(event){
-	$.post("https://ssl14.ovh.net/~taxibleu/client/in_app_calls.php", { planning: 'true', tel: tel, pass: pass, dep: '34' }, function(data){
+	$.post("https://ssl14.ovh.net/~taxibleu/ambuclient/in_app_calls.php", { planning: 'true', tel: tel, pass: pass, dep: 'ambu' }, function(data){
 		$.mobile.loading( "show" );
 		$("#plan_cont").empty().append(data);
 		$("#plan_cont").trigger('create');
@@ -151,7 +151,7 @@ $( '#planning' ).live( 'pagebeforeshow',function(event){
 });
 
 $( '#cmd' ).live( 'pagebeforeshow',function(event){
-	$.post("https://ssl14.ovh.net/~taxibleu/server/get_app_bookings.php", { taxi: taxi, tel: tel, email: email, dispo: dispo, pass: pass, dep: '34', mngid: mngid, group: group }, function(data){
+	$.post("https://ssl14.ovh.net/~taxibleu/ambuserver/get_app_bookings.php", { taxi: taxi, tel: tel, email: email, dispo: dispo, pass: pass, dep: 'ambu', mngid: mngid, group: group }, function(data){
 		$.mobile.loading( "show" );
 		$("#screen_bookings").empty().append(data);
 		$("#screen_bookings").trigger('create');
@@ -160,7 +160,7 @@ $( '#cmd' ).live( 'pagebeforeshow',function(event){
 });
 
 $( '#history' ).live( 'pagebeforeshow',function(event){
-	$.post("https://ssl14.ovh.net/~taxibleu/client/in_app_calls.php", { history: 'true', tel: tel, pass: pass, dep: '34' }, function(data){
+	$.post("https://ssl14.ovh.net/~taxibleu/ambuclient/in_app_calls.php", { history: 'true', tel: tel, pass: pass, dep: 'ambu' }, function(data){
 		$.mobile.loading( "show" );
 		$("#hist_cont").empty().append(data);
 		$("#hist_cont").trigger('create');
@@ -169,7 +169,7 @@ $( '#history' ).live( 'pagebeforeshow',function(event){
 });
 
 $( '#infos' ).live( 'pagebeforeshow',function(event){
-	$.post("https://ssl14.ovh.net/~taxibleu/client/in_app_calls.php", { infos: 'true', pass: pass, dep: '34' }, function(data){
+	$.post("https://ssl14.ovh.net/~taxibleu/ambuclient/in_app_calls.php", { infos: 'true', pass: pass, dep: 'ambu' }, function(data){
 		$.mobile.loading( "show" );
 		$("#infos_cont").empty().append(data);
 		$("#infos_cont").trigger('create');
@@ -190,7 +190,7 @@ $('#manage').live('pagecreate', function() {
 	$('#siret').val(siret);
 	$('#station').val(dec_station);
 	$('#log').val(tel);
-	$.post("https://ssl14.ovh.net/~taxibleu/client/billing.php", { taxi: taxi, pass: pass, dep: '34', mngid: mngid }, function(data){
+	$.post("https://ssl14.ovh.net/~taxibleu/ambuclient/billing.php", { taxi: taxi, pass: pass, dep: 'ambu', mngid: mngid }, function(data){
 		$("#billing").empty().append(data);
 		//alert(data);
 	});
@@ -246,13 +246,13 @@ function get_coords(position)
 	//var x=document.getElementById("results");
 	//x.innerHTML="lat = " + lat + " - lng = " +lng;
 	//alert('taxi: ' + taxi + ' tel: ' + tel + ' pass=' + pass);
-	$.post("https://ssl14.ovh.net/~taxibleu/client/insert_app_cab_geoloc.php?lat="+lat+"&lng="+lng, { taxi: taxi, tel: tel, email: email, pass: pass, dep: '34' }); 
+	$.post("https://ssl14.ovh.net/~taxibleu/ambuclient/insert_app_cab_geoloc.php?lat="+lat+"&lng="+lng, { taxi: taxi, tel: tel, email: email, pass: pass, dep: 'ambu' }); 
 }
 
 function update()
 {
 	var dispo = $.sessionStorage.getItem('dispo');
-	$.post("https://ssl14.ovh.net/~taxibleu/server/get_app_drive.php", { taxi: taxi, tel: tel, email: email, dispo: dispo, pass: pass, dep: '34', mngid: mngid, group: group }, function(data){ 
+	$.post("https://ssl14.ovh.net/~taxibleu/ambuserver/get_app_drive.php", { taxi: taxi, tel: tel, email: email, dispo: dispo, pass: pass, dep: 'ambu', mngid: mngid, group: group }, function(data){ 
 		$("#screen_job").empty().append(data);
 		if (data != 0)
 		{
@@ -277,7 +277,7 @@ function update()
 setTimeout('update()', 2000);
 }
 function checkCmd() {
-	$.post("https://ssl14.ovh.net/~taxibleu/server/get_app_bookings.php", { taxi: taxi, tel: tel, email: email, dispo: dispo, pass: pass, dep: '34', mngid: mngid, group: group, ring: pass }, function(data){
+	$.post("https://ssl14.ovh.net/~taxibleu/ambuserver/get_app_bookings.php", { taxi: taxi, tel: tel, email: email, dispo: dispo, pass: pass, dep: 'ambu', mngid: mngid, group: group, ring: pass }, function(data){
 		if (data != 0)
 		{
 			$('.orders').addClass('badge');
@@ -291,7 +291,7 @@ function checkCmd() {
 setTimeout('checkCmd()', 300000);
 }
 function refreshCmd() {
-	$.post("https://ssl14.ovh.net/~taxibleu/server/get_app_bookings.php", { taxi: taxi, tel: tel, email: email, dispo: dispo, pass: pass, dep: '34', mngid: mngid, group: group }, function(data){
+	$.post("https://ssl14.ovh.net/~taxibleu/ambuserver/get_app_bookings.php", { taxi: taxi, tel: tel, email: email, dispo: dispo, pass: pass, dep: 'ambu', mngid: mngid, group: group }, function(data){
 		$.mobile.loading( "show" );
 		$("#screen_bookings").empty().append(data);
 		$("#screen_bookings").trigger('create');
@@ -299,7 +299,7 @@ function refreshCmd() {
 }
 function dispo()
 {
-	$.post("https://ssl14.ovh.net/~taxibleu/client/dispo_app.php?check=1", { taxi: taxi, tel: tel, pass: pass, dep: '34' }, function(data){ 
+	$.post("https://ssl14.ovh.net/~taxibleu/ambuclient/dispo_app.php?check=1", { taxi: taxi, tel: tel, pass: pass, dep: 'ambu' }, function(data){ 
 		var display = '';
 		if (data.dispo == 1)
 		{
@@ -324,7 +324,7 @@ function dispo()
 }
 function Dispo_On()
 {
-	$.post("https://ssl14.ovh.net/~taxibleu/client/dispo_app.php?dispo=1", { taxi: taxi, tel: tel, pass: pass, dep: '34' });
+	$.post("https://ssl14.ovh.net/~taxibleu/ambuclient/dispo_app.php?dispo=1", { taxi: taxi, tel: tel, pass: pass, dep: 'ambu' });
 	$("#dispo").empty().append('<a href="#home" onClick="Dispo_Off()"><img src="visuels/DispoOn_flat.png" width="100%"/></a>');
 	$("#dispo_jobs").empty().append('<a href="#jobs_taker" onClick="Dispo_Off()"><img src="visuels/DispoOn_flat.png" width="100%"/></a>');
 	$("#dispo_cmd").empty().append('<a href="#jobs_taker" onClick="Dispo_Off()"><img src="visuels/DispoOn_flat.png" width="100%"/></a>');
@@ -332,7 +332,7 @@ function Dispo_On()
 }
 function Dispo_Off()
 {
-	$.post("https://ssl14.ovh.net/~taxibleu/client/dispo_app.php?dispo=0", { taxi: taxi, tel: tel, pass: pass, dep: '34' }); 
+	$.post("https://ssl14.ovh.net/~taxibleu/ambuclient/dispo_app.php?dispo=0", { taxi: taxi, tel: tel, pass: pass, dep: 'ambu' }); 
 	$("#dispo").empty().append('<a href="#home" onClick="Dispo_On()"><img src="visuels/DispoOff_flat.png" width="100%"/></a>');
 	$("#dispo_jobs").empty().append('<a href="#jobs_taker" onClick="Dispo_On()"><img src="visuels/DispoOff_flat.png" width="100%"/></a>');
 	$("#dispo_cmd").empty().append('<a href="#jobs_taker" onClick="Dispo_On()"><img src="visuels/DispoOff_flat.png" width="100%"/></a>');
@@ -353,7 +353,7 @@ function Sound_Off()
 }
 function footer()
 {
-	$.post("https://ssl14.ovh.net/~taxibleu/client/footer_app.php", { dep: '34' }, function(data) {
+	$.post("https://ssl14.ovh.net/~taxibleu/ambuclient/footer_app.php", { dep: 'ambu' }, function(data) {
 		for (i=0; i<9; i++) {
 			$('#footer_cont' + i).empty().append(data);
 		}
@@ -392,7 +392,7 @@ function planMap(rdv, idcourse, com, cell)
 }
 function justify(when, rdv, comments, destadd, cell)//justify(\''.$when.'\', \''.$rdv.'\', \''.$comments.'\', \''.$destadd.'\', \''.$cell.'\
 {
-	$.post("https://ssl14.ovh.net/~taxibleu/client/justify.php", { when: when, rdv: rdv, comments: comments, destadd: destadd, cell: cell, dep: '34', pass: pass, email: email }, function(data){
+	$.post("https://ssl14.ovh.net/~taxibleu/ambuclient/justify.php", { when: when, rdv: rdv, comments: comments, destadd: destadd, cell: cell, dep: 'ambu', pass: pass, email: email }, function(data){
 		$.mobile.loading( "show" );
 		alert(data);
 		//window.plugins.childBrowser.showWebPage('http://www.taximedia.fr', { showLocationBar: true });
@@ -414,7 +414,7 @@ function directCall()
 	//var link2diary = document.getElementById('link2diary');
 	query_string = dataDiary + '&delay=' + delay;
 	$.sessionStorage.setItem('query_string', query_string);
-	$.post("https://ssl14.ovh.net/~taxibleu/server/diary_app_dcvp.php?dep=34", query_string, function(data){ 
+	$.post("https://ssl14.ovh.net/~taxibleu/ambuserver/diary_app_dcvp.php?dep=ambu", query_string, function(data){ 
 		switch (data.location) {
 			 case '#directions_map':
 				//alert('in direction case');
@@ -442,7 +442,7 @@ function directCall()
 function diaryCall(query_string)
 {
 	$.mobile.loading( "show" );
-	$.post("https://ssl14.ovh.net/~taxibleu/server/bookings_app_dcvp.php?dep=34", query_string, function(data){ 
+	$.post("https://ssl14.ovh.net/~taxibleu/ambuserver/bookings_app_dcvp.php?dep=ambu", query_string, function(data){ 
 		switch (data.location) {
 			 case '#directions_map':
 				//alert('in direction case');
@@ -502,7 +502,7 @@ function secureCall(position)
 	var idcourseUrg = myDate.getTime();
 	$.sessionStorage.setItem('idcourseUrg', idcourseUrg);
 	
-	$.post("https://ssl14.ovh.net/~taxibleu/client/secure_xml.php", { lat: lat, lng: lng, dep: '34', pass: pass}, function(xml){
+	$.post("https://ssl14.ovh.net/~taxibleu/ambuclient/secure_xml.php", { lat: lat, lng: lng, dep: 'ambu', pass: pass}, function(xml){
 																							 
 		var i = 0; // We need to make any numreq unique on that one !!
 		$(xml).find('marker').each(function(){
@@ -517,7 +517,7 @@ function secureCall(position)
 			//$('<div id='+name+'></div>').html('<p><b>'+name+' - '+address+' - '+lat+' - '+lng+' - '+timestamp+' - '+distance+'</b></p>').appendTo('#secureResults');
 			//$('#secureResults').append('<p><b>'+name+' - '+address+' - '+lat+' - '+lng+' - '+timestamp+' - '+distance+'</b></p>');
 			
-			$.post("https://ssl14.ovh.net/~taxibleu/client/secure.php", { taxi: name, tel: address, rdvpoint: rdvpoint, helptaxi: taxi, helpname: helpname, helptel: tel, idcourse: idcourseUrg, num_req: num_reqUrg, dep: '34', pass: pass}, function(data){
+			$.post("https://ssl14.ovh.net/~taxibleu/ambuclient/secure.php", { taxi: name, tel: address, rdvpoint: rdvpoint, helptaxi: taxi, helpname: helpname, helptel: tel, idcourse: idcourseUrg, num_req: num_reqUrg, dep: 'ambu', pass: pass}, function(data){
 				//$('#secureResults').append(data);
 			});
 			i++;
@@ -533,7 +533,7 @@ function check_answer()
 	$.mobile.pageContainer.pagecontainer("change", "#urgency", { transition: "slide"} );
 	var idcourseUrg = $.sessionStorage.getItem('idcourseUrg');
 	sec = setInterval( function () {
-		$.post("https://ssl14.ovh.net/~taxibleu/client/status.php?idcourse=" + idcourseUrg + "&check=1" , { dep: '34'}, function(data){ 
+		$.post("https://ssl14.ovh.net/~taxibleu/ambuclient/status.php?idcourse=" + idcourseUrg + "&check=1" , { dep: 'ambu'}, function(data){ 
 			if (data != 0)
 			{
 				$('#urgencyResults').empty().append(data);
@@ -545,7 +545,7 @@ function check_answer()
 function stopSecureCall()
 {
 	var idcourseUrg = $.sessionStorage.getItem('idcourseUrg');
-	$.post("https://ssl14.ovh.net/~taxibleu/client/secure.php", { taxi: '', tel: '', rdvpoint: '', helptaxi: taxi, helpname: '', helptel: tel, idcourse: idcourseUrg, dep: '34', pass: pass, stopcall: 'true'}, function(data){
+	$.post("https://ssl14.ovh.net/~taxibleu/ambuclient/secure.php", { taxi: '', tel: '', rdvpoint: '', helptaxi: taxi, helpname: '', helptel: tel, idcourse: idcourseUrg, dep: 'ambu', pass: pass, stopcall: 'true'}, function(data){
 		$.mobile.pageContainer.pagecontainer("change", "#home", { transition: "slide"} );
 	});
 	//$.sessionStorage.setItem('idcourseUrg', false);
@@ -559,13 +559,13 @@ function taximedia()
 }
 function help()
 {
-	//window.plugins.childBrowser.showWebPage('http://taxibleuservices.com/client/help.html', { showLocationBar: true });
-	window.open('http://taxibleuservices.com/client/help.html','_blank','location=yes,enableViewportScale=yes,closebuttoncaption=Fermer');
+	//window.plugins.childBrowser.showWebPage('http://taxibleuservices.com/ambuclient/help.html', { showLocationBar: true });
+	window.open('http://taxibleuservices.com/ambuclient/help.html','_blank','location=yes,enableViewportScale=yes,closebuttoncaption=Fermer');
 }
 function cgv()
 {
-	//window.plugins.childBrowser.showWebPage('http://taxibleuservices.com/client/docs/CGV.pdf', { showLocationBar: true });
-	window.open('http://taxibleuservices.com/client/docs/CGV.pdf','_blank','location=yes,enableViewportScale=yes,closebuttoncaption=Fermer');
+	//window.plugins.childBrowser.showWebPage('http://taxibleuservices.com/ambuclient/docs/CGV.pdf', { showLocationBar: true });
+	window.open('http://taxibleuservices.com/ambuclient/docs/CGV.pdf','_blank','location=yes,enableViewportScale=yes,closebuttoncaption=Fermer');
 }
 
 // Checks App or Browser
@@ -593,7 +593,7 @@ if ( app ) {
 	}
 }
 function onResume() {
-	$.post("https://ssl14.ovh.net/~taxibleu/client/active_app.php", { tel: tel, mngid: mngid, dep: '34'}, function(data) {});
+	$.post("https://ssl14.ovh.net/~taxibleu/ambuclient/active_app.php", { tel: tel, mngid: mngid, dep: 'ambu'}, function(data) {});
 }
 var scanSuccess = function (result) {
 	var textFormats = "QR_CODE DATA_MATRIX";
@@ -650,7 +650,7 @@ function contactPick()
 function Share()
 {
 	var number = $('#telShare').val();
-	var message = "Téléchargez l'app myTaxi 34 en suivant ce lien : http://www.taximedia.fr/stores.php?app=mytaxi&dep=34";
+	var message = "Téléchargez l'app AmbuLife en suivant ce lien : http://www.taximedia.fr/stores.php?app=ambulife";
 	var intent = ""; //leave empty for sending sms using default intent
 	var success = function () {
 		//alert('Message sent successfully');
@@ -667,7 +667,7 @@ function Share()
 function ShareArt()
 {
 	var number = $('#telShare').val();
-	var message = "Téléchargez l'app artisan taxi DCVP 34 en suivant ce lien : http://www.taximedia.fr/stores.php?app=dcvp&dep=34";
+	var message = "Téléchargez l'app artisan taxi AmbuCorp en suivant ce lien : http://www.taximedia.fr/stores.php?app=ambucorp";
 	var intent = ""; //leave empty for sending sms using default intent
 	var success = function () {
 		//alert('Message sent successfully');
@@ -684,7 +684,7 @@ function ShareArt()
 function SharePad()
 {
 	var number = $('#telShare').val();
-	var message = "Rendez-vous sur le WebService myTaxi 34 Hôtels & Restaurants en suivant ce lien : http://ecra.se/AA";
+	var message = "Rendez-vous sur le WebService AmbuLife en suivant ce lien : http://ecra.se/AA";
 	var intent = ""; //leave empty for sending sms using default intent
 	var success = function () {
 		//alert('Message sent successfully');
@@ -701,7 +701,7 @@ function SharePad()
 function SharePro()
 {
 	var number = $('#telShare').val();
-	var message = "Téléchargez l'app myTaxi 34 Pro sur les sores en suivant ce lien : http://www.taximedia.fr/stores.php?app=pro&dep=34  ou rendez-vous sur le WebService en suivant ce lien : http://ecra.se/3jt";
+	var message = "Téléchargez l'app AmbuLife sur les sores en suivant ce lien : http://www.taximedia.fr/stores.php?app=ambulife  ou rendez-vous sur le WebService en suivant ce lien : http://ecra.se/3jt";
 	var intent = ""; //leave empty for sending sms using default intent
 	var success = function () {
 		//alert('Message sent successfully');
@@ -721,7 +721,7 @@ function contactShare()
 		setTimeout(function(){
 			//alert(result.name + " " + result.phoneNumber);
 			var number = result.phoneNumber;
-			var message = "Téléchargez l'app myTaxi 34 en suivant ce lien : http://www.taximedia.fr/stores.php?app=mytaxi&dep=34";
+			var message = "Téléchargez l'app AmbuLife en suivant ce lien : http://www.taximedia.fr/stores.php?app=ambulife";
 			var intent = ""; //leave empty for sending sms using default intent
 			var success = function () {
 				//alert('Message sent successfully');
@@ -863,11 +863,6 @@ $(document).ready(function(){
 		   required: true,
 		   phone: true
 		 },
-		 siret: {
-		   required: true,
-		   siret: true
-		 },
-		 station: "required",
 		 email: {
 		   required: true,
 		   email: true
@@ -882,7 +877,6 @@ $(document).ready(function(){
 		 nom: "Ce champs est obligatoire",
 		 prenom: "Ce champs est obligatoire",
 		 taxi: "Ce champs est obligatoire",
-		 station: "Ce champs est obligatoire",
 		 email: {
 		   required: "Nous avons besoin de votre email afin de vous contacter",
 		   email: "Votre email doit &ecirc;tre au format nom@domaine.com"
@@ -906,7 +900,7 @@ $(document).ready(function(){
 			// stop form from submitting normally
 			event.preventDefault();
 			// Subs some data
-			$.post("https://ssl14.ovh.net/~taxibleu/client/login_app.php", $("#modmy").serialize(), function(data) {
+			$.post("https://ssl14.ovh.net/~taxibleu/ambuclient/login_app.php", $("#modmy").serialize(), function(data) {
 				// GET SHIT BACK !!
 				$.localStorage.setItem('civil', data.civil);
 				$.localStorage.setItem('nom', data.nom);
@@ -936,7 +930,7 @@ $(document).ready(function(){
 		// stop form from submitting normally
 		event.preventDefault();
 		// Subs some data
-		$.post("https://ssl14.ovh.net/~taxibleu/client/login_app.php", $("#change").serialize(), function(data) {
+		$.post("https://ssl14.ovh.net/~taxibleu/ambuclient/login_app.php", $("#change").serialize(), function(data) {
 			// GET SHIT BACK !!
 			var display = '';
 			if (data.changed)
