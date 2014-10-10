@@ -3,7 +3,7 @@
     <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="CONTENT-LANGUAGE" content="French">
-    <title>DCVPad by TaxiMedia</title>
+    <title>AmbuCorp by TaxiMedia</title>
     <link type="image/x-icon" href="visuels/favicon.ico" rel="icon"/>
     <link type="image/x-icon" href="visuels/favicon.ico" rel="shortcut icon"/>
     <link rel="apple-touch-icon" href="visuels/idev.favicon.png"/>
@@ -33,10 +33,10 @@
             $.mobile.allowCrossDomainPages = true;
             $.mobile.selectmenu.prototype.options.nativeMenu = false;
 			//$.mobile.ajaxEnabled = false;
-			$.mobile.loader.prototype.options.text = "Veuillez patienter pendant la recherche de taxi disponible. Merci de votre confiance !";
+			$.mobile.loader.prototype.options.text = "Veuillez patienter pendant la recherche d&rsquo;ambulance disponible. Merci de votre confiance !";
 			$.mobile.loader.prototype.options.textVisible = "true";
 			$.mobile.loader.prototype.options.theme = "a";
-			$.mobile.loader.prototype.options.html = '<span class="ui-bar ui-overlay-c ui-corner-all"><center><img src="visuels/preload_world.gif"/><br><strong><span style="color:#F00;">Veuillez patienter pendant la recherche de taxi disponible</span><br>Merci de votre confiance !</strong></center></span>';
+			$.mobile.loader.prototype.options.html = '<span class="ui-bar ui-overlay-c ui-corner-all"><center><img src="visuels/preload_world.gif"/><br><strong><span style="color:#F00;">Veuillez patienter pendant la recherche d&rsquo;ambulance disponible</span><br>Merci de votre confiance !</strong></center></span>';
         });
     </script>    
     <script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
@@ -220,7 +220,7 @@
 		var rdvlng = '';
 		url = '';
 		num_req = idcourse;
-		url = 'taxi=0000&tel=0000000000&idcourse=' + idcourse + '&num_req=' + num_req + '&rdvpoint=' + rdvpoint + '&lat=' + rdvlat + '&lng=' + rdvlng + '&comments=' + comments + '&cell=' + cell + '&when=' + when + '&date=' + date + '&operator=' + operator + '&howmany=' + howMany + '&dep=34&group=1&ack=0&db=1';
+		url = 'taxi=0000&tel=0000000000&idcourse=' + idcourse + '&num_req=' + num_req + '&rdvpoint=' + rdvpoint + '&lat=' + rdvlat + '&lng=' + rdvlng + '&comments=' + comments + '&cell=' + cell + '&when=' + when + '&date=' + date + '&operator=' + operator + '&howmany=' + howMany + '&dep=ambu&group=1&ack=0&db=1';
 		//url = url.replace(/'/g, "&rsquo;");
 		url = url.replace(/(?:\r\n|\r|\n)/g, '<br/>'); // Replaces line breaks by <br/>
 		$.post("https://ssl14.ovh.net/~taxibleu/ambuserver/bookings_app_share.php", url, function(data) {});
@@ -363,7 +363,7 @@
                     clearTimeout(endcourse); // Clears the current timeout
                     clearInterval(sec);
                     //$.fancybox.close();
-                    var endbox = confirm('Vous devez soit relancer votre course (OK) soit rechercher de nouveau taxis !! (Annuler)');
+                    var endbox = confirm('Vous devez soit relancer votre course (OK) soit rechercher de nouvelles ambulances !! (Annuler)');
                     if (endbox == true) {
 						$.mobile.pageContainer.pagecontainer("change", "#infos", { transition: "slide", reverse: true} );
                     }
@@ -451,7 +451,7 @@
 		url = '';
 		num_req = idcourse;
 		i = 0; // We need to make any numreq unique on that one !!
-		$.post("https://ssl14.ovh.net/~taxibleu/ambuserver/app_dcvp_xml.php", { lat: rdvlat, lng: rdvlng, type: typecar, howmany: howMany, cb: cb, group: '1', dep: '34', pass: 'true'}, function(xml){	
+		$.post("https://ssl14.ovh.net/~taxibleu/ambuserver/app_dcvp_xml.php", { lat: rdvlat, lng: rdvlng, type: typecar, howmany: howMany, cb: cb, group: '1', dep: 'ambu', pass: 'true'}, function(xml){	
 			$(xml).find('marker').each(function(){
 				var name = $(this).attr('name');
 				var address = $(this).attr('address');
@@ -462,14 +462,14 @@
 				i = $(this).attr('count');
 				num_req = num_req+1;
 				var latlng = new google.maps.LatLng(lat2, lng2);			
-				var display_name = 'Taxi ' + name;
+				var display_name = 'Ambulance ' + name;
 				var cabIcon = 'visuels/cab_marker.png';
 				mapEvent.addMarker({ id: i ,'position': latlng, 'bounds': true, 'title': display_name, 'icon': cabIcon }).click(function() {
-					infoCont = '<p style="color:#333;"><b>taxi n&deg; ' + name + ' est &agrave; ' + parseFloat(distance).toFixed(1) + ' Km du client<br>' + address+ '</b></p>';
+					infoCont = '<p style="color:#333;"><b>ambulance n&deg; ' + name + ' est &agrave; ' + parseFloat(distance).toFixed(1) + ' Km du client<br>' + address+ '</b></p>';
 					mapEvent.openInfoWindow({ 'content':  infoCont}, this);
 				});
 				//mapEvent.addBounds(latlng);
-				url = 'taxi=' + name + '&tel=' + address + '&idcourse=' + idcourse + '&num_req=' + num_req + '&rdvpoint=' + rdvpoint + '&lat=' + rdvlat + '&lng=' + rdvlng + '&comments=' + comments + '&cell=' + cell + '&when=' + when + '&date=' + date + '&operator=' + operator + '&dep=34&group=1&ack=0&db=1';
+				url = 'taxi=' + name + '&tel=' + address + '&idcourse=' + idcourse + '&num_req=' + num_req + '&rdvpoint=' + rdvpoint + '&lat=' + rdvlat + '&lng=' + rdvlng + '&comments=' + comments + '&cell=' + cell + '&when=' + when + '&date=' + date + '&operator=' + operator + '&dep=ambu&group=1&ack=0&db=1';
 				//url = url.replace(/'/g, "&rsquo;");
 				url = url.replace(/(?:\r\n|\r|\n)/g, '<br/>'); // Replaces line breaks by <br/>
 				//$.post("https://ssl14.ovh.net/~taxibleu/ambuserver/diary_app_share.php", url, function(data) {});
@@ -477,7 +477,7 @@
 			});
 			num_req = num_req+1;
 			i = parseInt(i,10)+1;
-			url = 'taxi=0000&tel=0000000000&idcourse=' + idcourse + '&num_req=' + num_req + '&rdvpoint=' + rdvpoint + '&lat=' + rdvlat + '&lng=' + rdvlng + '&comments=' + comments + '&cell=' + cell + '&when=' + when + '&date=' + date + '&operator=' + operator + '&dep=34&group=1&ack=0&db=1';
+			url = 'taxi=0000&tel=0000000000&idcourse=' + idcourse + '&num_req=' + num_req + '&rdvpoint=' + rdvpoint + '&lat=' + rdvlat + '&lng=' + rdvlng + '&comments=' + comments + '&cell=' + cell + '&when=' + when + '&date=' + date + '&operator=' + operator + '&dep=ambu&group=1&ack=0&db=1';
 			url = url.replace(/'/g, "&rsquo;");
 			url = url.replace(/(?:\r\n|\r|\n)/g, '<br/>'); // Replaces line breaks by <br/>
 			// Sends Auction Request to TaxiMedia ambuserver

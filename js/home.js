@@ -251,7 +251,7 @@ function get_coords(position)
 
 function update()
 {
-	var dispo = $.sessionStorage.getItem('dispo');
+	dispo = $.sessionStorage.getItem('dispo');
 	$.post("https://ssl14.ovh.net/~taxibleu/ambuserver/get_app_drive.php", { taxi: taxi, tel: tel, email: email, dispo: dispo, pass: pass, dep: 'ambu', mngid: mngid, group: group }, function(data){ 
 		$("#screen_job").empty().append(data);
 		if (data != 0)
