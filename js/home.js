@@ -115,7 +115,7 @@ $('#directions_map').live('pageshow', function() {
 
 $('#toolate').live('pagecreate', function() {
 	var idcourse = $.sessionStorage.getItem('idcourse');
-	var late = '<p style="color:#F00; font-size: large;"><b>D&eacute;sol&eacute; mais la course ' + idcourse + ' &agrave; &eacute;t&eacute; prise par un autre taxi.</b></p>';
+	var late = '<p style="color:#F00; font-size: large;"><b>D&eacute;sol&eacute; mais la course ' + idcourse + ' &agrave; &eacute;t&eacute; prise par une autre ambulance.</b></p>';
 	$("#late_cont").empty().append(late);			
 });
 

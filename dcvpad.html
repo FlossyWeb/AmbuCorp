@@ -69,7 +69,7 @@
 	var regName3 = $.localStorage.getItem('regName3');
 	var regCell3 = $.localStorage.getItem('regCell3');
 	var dontReg = false;
-	var mobileMap = { 'center': '43.609, 3.88', 'zoom': 12 };
+	var mobileMap = { 'center': '43.298977,5.386320', 'zoom': 12 };
 
 	function locateMe() {
 		if (navigator.userAgent.toLowerCase().match(/android/)) {
@@ -235,7 +235,7 @@
 		*/
 		$("#addressInput").geocomplete({
 		  map: "#map",
-		  location: "Montpellier, France"
+		  location: "Marseille, France"
 		});
         $("#search-box").hide("fast");
 		$("#next-box").show("medium");
@@ -465,7 +465,7 @@
 				var display_name = 'Ambulance ' + name;
 				var cabIcon = 'visuels/cab_marker.png';
 				mapEvent.addMarker({ id: i ,'position': latlng, 'bounds': true, 'title': display_name, 'icon': cabIcon }).click(function() {
-					infoCont = '<p style="color:#333;"><b>ambulance n&deg; ' + name + ' est &agrave; ' + parseFloat(distance).toFixed(1) + ' Km du client<br>' + address+ '</b></p>';
+					infoCont = '<p style="color:#333;"><b>L&rsquo;ambulance n&deg; ' + name + ' est &agrave; ' + parseFloat(distance).toFixed(1) + ' Km du client<br>' + address+ '</b></p>';
 					mapEvent.openInfoWindow({ 'content':  infoCont}, this);
 				});
 				//mapEvent.addBounds(latlng);
